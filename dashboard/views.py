@@ -10,13 +10,17 @@ def index(request):
 
 
 def auth(request):
-    if request.session['access_token']:
+
+    token = request.session.get('access_token')
+
+    if token:
         return redirect(user)
-    else:
-        return redirect(auth_url)
+    
+    return redirect(auth_url)
 
 
 def user(request):
+
     if request.session['access_token']:
         user, guild = getData(request.session['access_token'])
 
