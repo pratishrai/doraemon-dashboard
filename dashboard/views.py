@@ -19,6 +19,12 @@ def auth(request):
     return redirect(auth_url)
 
 
+def logout(request):
+    del request.session['access_token']
+    del request.session['userID']
+    return redirect(index)
+
+
 def user(request):
 
     if request.session['access_token']:
