@@ -19,15 +19,15 @@ def user(request):
 
         user,guild = getData(request.session['access_token'])
 
-        return JsonResponse({'user':user})
+        return JsonResponse({'user': user,'guild': guild})
 
     code = request.GET.get('code')
-    user,access_token = exchange_code(code)
+    user,guild,access_token = exchange_code(code)
 
     request.session['access_token'] = access_token
     request.session['userID'] = user['id']
 
-    return JsonResponse({'user': user})
+    return JsonResponse({'user': user,'guild': guild})
 
 def getData(access_token):
 
