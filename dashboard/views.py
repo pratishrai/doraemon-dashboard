@@ -2,7 +2,7 @@ import requests
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
-auth_url = "https://discord.com/api/oauth2/authorize?client_id=709321027775365150&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fuser%2F&response_type=code&scope=identify%20email%20guilds"
+auth_url = "https://discord.com/api/oauth2/authorize?client_id=709321027775365150&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fuser&response_type=code&scope=identify%20email%20guilds"
 
 
 def index(request):
@@ -26,8 +26,8 @@ def logout(request):
 
 
 def user(request):
-
-    if request.session['access_token']:
+    token = request.session.get('access_token')
+    if token:
         user, guild = getData(request.session['access_token'])
 
         return JsonResponse({'user': user, 'guild': guild})
@@ -58,7 +58,7 @@ def exchange_code(code: str):
         "client_secret": "I_7XyaUS-4QmW5ttSd8lNNt2XXCxd5U6",
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri": "http://127.0.0.1:8000/user/",
+        "redirect_uri": "http://127.0.0.1:8000/user",
         "scope": "identify email guild"
     }
     headers = {
