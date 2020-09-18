@@ -6,23 +6,19 @@ auth_url = "https://discord.com/api/oauth2/authorize?client_id=70932102777536515
 
 
 def index(request):
-    return render(request, 'index.html')
+    token = request.session.get('access_token')
+    user = None
+    guild = None
+    if token:
+        user, guild = getData(request.session['access_token'])
+    return render(request, 'index.html', {'user': user, 'guild': guild})
 
 
 def auth(request):
-
     token = request.session.get('access_token')
-
     if token:
         return redirect(user)
-    
     return redirect(auth_url)
-
-
-def logout(request):
-    del request.session['access_token']
-    del request.session['userID']
-    return redirect(index)
 
 
 def user(request):
@@ -31,6 +27,7 @@ def user(request):
         user, guild = getData(request.session['access_token'])
 
         return JsonResponse({'user': user, 'guild': guild})
+        #return render(request, 'user.html', {'user': user, 'guild': guild})
 
     code = request.GET.get('code')
     user, guild, access_token = exchange_code(code)
@@ -38,7 +35,7 @@ def user(request):
     request.session['access_token'] = access_token
     request.session['userID'] = user['id']
 
-    return JsonResponse({'user': user, 'guild': guild})
+    return redirect(auth)
 
 
 def getData(access_token):
