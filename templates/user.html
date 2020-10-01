@@ -15,27 +15,16 @@
 {% for guild in guild %}
 
 <div class="column is-two-fifths server">
-<div class="card"  onclick="redirect('{{guild.id}}')">
-    <div class="card-content">
-        <div class="media">
-            <div class="media-left">
-                <figure class="image is-48x48">
-                    <img src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon}}.png" alt="Avatar" class="server-image">
-                </figure>
-            </div>
-
-            <div class="media-content">
-                <p class="title is-4" style="padding-top:8px;">{{guild.name}}</p>
-            </div>
-
+    <div class="card" onclick="redirect('{{guild.id}}')"  style="width: 18rem;">
+        <img src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon}}.png" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">{{guild.name}}</h5>
         </div>
     </div>
-
-</div>
 </div>
 {% endfor %}
 {% endif %}
-</div>
+
 
 <script>
     function redirect(id){
