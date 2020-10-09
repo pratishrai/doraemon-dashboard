@@ -7,7 +7,25 @@
 </head>
 <body>
 {% block content %}
-	Homepage
+A multipurpose Discord Bot that has the commands commonly used on every server, like Moderation, Fun, Playing Music and much more.
+
+  <div class="buttons">
+	{% if not user %}
+	<a class="button is-info" href="/auth/">
+		<span class="icon">
+			<i class="fab fa-discord"></i>
+		</span>
+	  <strong>Add to Discord</strong>
+	</a>
+	{% else %}
+	<a class="button is-info" href="/user/">
+		<span class="icon">
+			<i class="fab fa-discord"></i>
+		</span>
+	  <strong>Add to Discord</strong>
+	</a>
+	{% endif %}
+  </div>
 
 {% endblock %}
 </body>

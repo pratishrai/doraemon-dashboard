@@ -62,7 +62,7 @@ def getData(access_token):
 def exchange_code(code: str):
     data = {
         "client_id": "709321027775365150",
-        "client_secret": "client secret",
+        "client_secret": "Client Secret",
         "grant_type": "authorization_code",
         "code": code,
         "redirect_uri": "http://127.0.0.1:8000/user/",

@@ -15,14 +15,27 @@
 <div class="row">
     {% for guild in guild %}
     <div class="col">
-        <div class="card" style="width: 15rem;">
-            <img src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon}}.png" class="card-img-top" alt="{{ guild.name }}">
-            <div class="card-body">
-              <h5 class="card-title">{{guild.name}}</h5>
-              <button class="btn btn-success" onclick="redirect('{{guild.id}}')">Customize</button> <a href="https://discord.com/api/oauth2/authorize?client_id=709321027775365150&permissions=8&scope=bot&guild_id={{ guild.id }}" target="_blank"><button class="btn btn-info">Invite</button></a>
+          <div class="card">
+            <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-48x48">
+                      <img src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon}}.png" alt="{{ guild.name }}">
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="title is-4">{{ guild.name }}</p>
+                    <p class="subtitle is-6">{{ guild.id }}</p>
+                  </div>
+                </div>
+              <div class="buttons">
+                <button class="button is-primary" onclick="redirect('{{guild.id}}')">Customize</button>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=709321027775365150&permissions=8&scope=bot&guild_id={{ guild.id }}" target="_blank"></a><button class="button is-warning">Add Doraemon</button></a>
+              </div>
             </div>
           </div>
     </div>
+    <br>
     {% endfor %}
 </div>
 
