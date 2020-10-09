@@ -25,9 +25,13 @@ def user(request):
     token = request.session.get('access_token')
     if token:
         user, guild = getData(request.session['access_token'])
-
-        #return JsonResponse({'user': user, 'guild': guild})
-        return render(request, 'user.html', {'user': user, 'guild': guild})
+        admin_guilds = []
+        for guilds in guild:
+            perms = guilds['permissions']
+            if perms & 8:
+                admin_guilds.append(guilds)
+        #return JsonResponse({'user': user, 'guild': admin_guilds})
+        return render(request, 'user.html', {'user': user, 'guild': admin_guilds})
 
     code = request.GET.get('code')
     user, guild, access_token = exchange_code(code)
@@ -58,11 +62,11 @@ def getData(access_token):
 def exchange_code(code: str):
     data = {
         "client_id": "709321027775365150",
-        "client_secret": "rd24BXGOkruso5MXjwaByvfFKjvIExOt",
+        "client_secret": "client secret",
         "grant_type": "authorization_code",
         "code": code,
         "redirect_uri": "http://127.0.0.1:8000/user/",
-        "scope": "identify email guild"
+        "scope": "identify guild"
     }
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'

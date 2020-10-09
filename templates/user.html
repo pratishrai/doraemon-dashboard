@@ -8,21 +8,24 @@
 <body>
 {% block content %}
 
-<div class="columns is-mobile is-multiline is-narrow-mobile">
 {% if not guild %}
-    <h1 class="no-server" style="margin:10px">No Servers Found, <a href="https://discord.com/api/oauth2/authorize?client_id=733732900939366427&permissions=8&scope=bot">Invite Antonn</a></h1>
+    <h1 class="no-server" style="margin:10px">No Servers Found</h1>
 {% else %}
-{% for guild in guild %}
-
-<div class="column is-two-fifths server">
-    <div class="card" onclick="redirect('{{guild.id}}')"  style="width: 18rem;">
-        <img src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon}}.png" class="card-img-top" alt="...">
-        <div class="card-body">
-        <h5 class="card-title">{{guild.name}}</h5>
-        </div>
+<h1>Your Servers:</h1>
+<div class="row">
+    {% for guild in guild %}
+    <div class="col">
+        <div class="card" style="width: 15rem;">
+            <img src="https://cdn.discordapp.com/icons/{{guild.id}}/{{guild.icon}}.png" class="card-img-top" alt="{{ guild.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{guild.name}}</h5>
+              <button class="btn btn-success" onclick="redirect('{{guild.id}}')">Customize</button> <a href="https://discord.com/api/oauth2/authorize?client_id=709321027775365150&permissions=8&scope=bot&guild_id={{ guild.id }}" target="_blank"><button class="btn btn-info">Invite</button></a>
+            </div>
+          </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
 {% endif %}
 
 
