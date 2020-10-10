@@ -23,6 +23,8 @@ def auth(request):
 
 def user(request):
     token = request.session.get('access_token')
+    user = None
+    guild = None
     if token:
         user, guild = getData(request.session['access_token'])
         admin_guilds = []
@@ -93,9 +95,12 @@ def docs(request):
     token = request.session.get('access_token')
     user = None
     guild = None
+    user = None
+    guild = None
     if token:
         user, guild = getData(request.session['access_token'])
     return render(request, 'docs.html', {'user': user, 'guild': guild})
+
 
 def dashboard(request):
     token = request.session.get('access_token')

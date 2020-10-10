@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
-<html>
+<html lang="en">
+
 <head>
-	<title>Doraemon | Home</title>
+    <title>Doraemon | Home</title>
 </head>
+
 <body>
 {% block content %}
-A multipurpose Discord Bot that has the commands commonly used on every server, like Moderation, Fun, Playing Music and much more.
 
-  <div class="buttons">
-	{% if not user %}
-	<a class="button is-info" href="/auth/">
-		<span class="icon">
-			<i class="fab fa-discord"></i>
-		</span>
-	  <strong>Add to Discord</strong>
-	</a>
-	{% else %}
-	<a class="button is-info" href="/user/">
-		<span class="icon">
-			<i class="fab fa-discord"></i>
-		</span>
-	  <strong>Add to Discord</strong>
-	</a>
-	{% endif %}
-  </div>
+<section id="home">
+    <div class="columns">
+        <div class="column">
+            <figure class="image is-square">
+                <img src="{% static 'img/bot-pfp.png' %}">
+            </figure>
+        </div>
+        <div class="column">
+            <div class="idk" style=" margin: 0; position: absolute; top: 30%;">
+                <h3 class="subtitle is-3 is-desktop is-vcentered" style="color: antiquewhite;">
+                A multipurpose Discord Bot that has all usefull commands commonly used on every server, like Moderation, Fun, Playing Music and much more.</h3>
+            <div class="buttons">
+                {% if not user %}
+                    <a class="button is-link" href="/auth/">
+                    <span class="icon">
+                        <i class="fab fa-discord"></i>
+                    </span>
+                        <strong>Add to Discord</strong>
+                    </a>
+                {% else %}
+                    <a class="button is-link" href="/user/">
+                    <span class="icon">
+                        <i class="fab fa-discord"></i>
+                    </span>
+                        <strong>Add to Discord</strong>
+                    </a>
+                {% endif %}
+                <a class="button is-link" href="#features">
+                    <strong>See Features</strong>
+                </a>
+            </div>
+            </div>  
+        </div>
+    </div>
+</section>
+<section id="features">
+    this is the features section
+</section>
 
 {% endblock %}
 </body>
+
 </html>
