@@ -1,13 +1,6 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
-<html lang="en">
 
-<head>
-    <title>Doraemon | Dashboard</title>
-</head>
-
-<body>
     {% block content %}
     {% if not guild %}
     <h1 class="no-server" style="margin:10px">No Servers Found</h1>
@@ -50,6 +43,3 @@
     </script>
 
     {% endblock %}
-</body>
-
-</html>
