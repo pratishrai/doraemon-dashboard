@@ -1,8 +1,9 @@
 import requests
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-import env_file
-token = env_file.get()
+import os
+# import env_file
+# token = env_file.get()
 
 # auth_url = token["AUTH_URL"]
 auth_url = os.environ["AUTH_URL"]
@@ -70,7 +71,7 @@ def exchange_code(code: str):
         "client_secret": os.environ["CLIENT_SECRET"], # token["CLIENT_SECRET"]
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri": "http://127.0.0.1:8000/user/",
+        "redirect_uri": os.environ["REDIRECT_URI"], # token["REDIRECT_URI"]
         "scope": "identify guild"
     }
     headers = {
