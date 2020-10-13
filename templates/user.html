@@ -8,39 +8,38 @@
 </head>
 
 <body>
-{% block content %}
-
+    {% block content %}
     {% if not guild %}
-        <h1 class="no-server" style="margin:10px">No Servers Found</h1>
+    <h1 class="no-server" style="margin:10px">No Servers Found</h1>
     {% else %}
-        <h1>Your Servers:</h1>
-        {% for guild in guild %}
-            <div class="card" style="background-color: black;">
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="image is-48x48">
-                                <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png"
-                                     alt="{{ guild.name }}">
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">{{ guild.name }}</p>
-                            <p class="subtitle is-6">{{ guild.id }}</p>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <button class="button is-primary" onclick="redirect('{{ guild.id }}')">Customize</button>
-                        <a href="https://discord.com/api/oauth2/authorize?client_id=709321027775365150&permissions=8&scope=bot&guild_id={{ guild.id }}"
-                           target="_blank"></a>
-                        <button class="button is-warning">Add Doraemon</button>
-                        </a>
-                    </div>
+    <h4 class="title is-4" style="color: white">Your Servers:</h4>
+    {% for guild in guild %}
+    <div class="card" style="background-color: #1a1a1a">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png"
+                            alt="{{ guild.name }}">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4" style="color: white">{{ guild.name }}</p>
+                    <p class="subtitle is-6" style="color: white">{{ guild.id }}</p>
                 </div>
             </div>
+            <div class="buttons">
+                <button class="button is-primary" onclick="redirect('{{ guild.id }}')">Customize</button>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=709321027775365150&permissions=8&scope=bot&guild_id={{ guild.id }}"
+                    target="_blank">
+                <button class="button is-warning">Add Doraemon</button>
+                </a>
+            </div>
+        </div>
+    </div>
 
-            <br>
-        {% endfor %}
+    <br>
+    {% endfor %}
     {% endif %}
 
     <script>
@@ -50,7 +49,7 @@
 
     </script>
 
-{% endblock %}
+    {% endblock %}
 </body>
 
 </html>

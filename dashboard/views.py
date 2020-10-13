@@ -1,8 +1,11 @@
 import requests
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+import env_file
+token = env_file.get()
 
-auth_url = "https://discord.com/api/oauth2/authorize?client_id=709321027775365150&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fuser%2F&response_type=code&scope=identify%20guilds"
+# auth_url = token["AUTH_URL"]
+auth_url = os.environ["AUTH_URL"]
 
 
 def index(request):
@@ -64,7 +67,7 @@ def getData(access_token):
 def exchange_code(code: str):
     data = {
         "client_id": "709321027775365150",
-        "client_secret": "Client Secret",
+        "client_secret": os.environ["CLIENT_SECRET"], # token["CLIENT_SECRET"]
         "grant_type": "authorization_code",
         "code": code,
         "redirect_uri": "http://127.0.0.1:8000/user/",
@@ -95,11 +98,17 @@ def docs(request):
     token = request.session.get('access_token')
     user = None
     guild = None
-    user = None
-    guild = None
     if token:
         user, guild = getData(request.session['access_token'])
     return render(request, 'docs.html', {'user': user, 'guild': guild})
+
+
+def getGuildData(access_token, guild_id):
+    guild_data = requests.get(f"https://discord.com/api/guilds/{guild_id}", headers={
+        'Authorization': 'Bearer %s' % access_token
+    })
+
+    return guild_data.json()
 
 
 def dashboard(request):
@@ -112,4 +121,5 @@ def dashboard(request):
         for guild_info in guild:
             if guild_info['id'] == guild_id:
                 fetched_guild_info = guild_info
-    return render(request, 'dashboard.html', {'user': user, 'guild': guild, 'guild_info': fetched_guild_info})
+        guild_data = getGuildData(access_token=request.session['access_token'], guild_id=guild_id)
+    return render(request, 'dashboard.html', {'user': user, 'guild': guild, 'guild_info': fetched_guild_info, 'guild_data': guild_data})
